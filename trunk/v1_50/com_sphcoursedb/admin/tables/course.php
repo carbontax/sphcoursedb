@@ -32,8 +32,33 @@ class TableCourse extends JTable
 	 * @var string
 	 */
 	var $number = null;
-
+	
 	/**
+	 * @var string
+	 */
+	var $instructor = null;
+	
+	/**
+	 * @var string
+	 */
+	var $prerequisites = null;
+	
+		/**
+	 * @var string
+	 */
+	var $description = null;
+	
+	/**
+	 * @var string
+	 */
+	var $objectives = null;
+	
+	/**
+	 * @var string
+	 */
+	var $course_format = null;
+	
+/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

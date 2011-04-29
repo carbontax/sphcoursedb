@@ -17,14 +17,15 @@ jimport('joomla.application.component.view');
  * @package    ca.utoronto.med.sph
  * @subpackage Components
  */
-class SPHCourseDBViewCourse extends JView
+class SPHCourseDBViewSeriesList extends JView
 {
 	function display($tpl =  NULL) {
-
-		$model =& $this->getModel();
+		$doc =& JFactory::getDocument();
+		$doc->setTitle('Course Series List');
 		
-		$course = $this->get('Data');
-		$this->assignRef('course',$course);
+		$items =& $this->get( 'Data');
+
+		$this->assignRef( 'items', $items );
 		parent::display($tpl);
 	}
 }
