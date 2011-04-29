@@ -21,7 +21,7 @@ class SPHCourseDBModelCourse extends JModel
 
 	function __construct() {
 		parent::__construct();
-		 
+			
 		$array = JRequest::getVar('cid',0,'','array');
 		$this->setId((int)$array[0]);
 	}
@@ -50,14 +50,26 @@ class SPHCourseDBModelCourse extends JModel
 			$this->_data->series_id = null;
 			$this->_data->name = null;
 			$this->_data->number = null;
+			$this->_data->instructor = null;
+			$this->_data->prerequisites = null;
+			$this->_data->description = null;
+			$this->_data->objectives = null;
+			$this->_data->course_format = null;
 		}
 		return $this->_data;
 	}
 
-	function store() {
+	/**
+	 * This store method takes an optional POST array
+	 * to allow for RAW html from editor inputs.
+	 * @param POST array $data - optional
+	 */
+	function store($data=null) {
 		$row =& $this->getTable();
-		 
-		$data = JRequest::get('post');
+
+		if ($data == null ) {
+			$data = JRequest::get('post');
+		}
 		if ( !$row->bind($data) ) {
 			$this->setError($this->_db->getErrorMsg());
 			return false;

@@ -53,7 +53,6 @@ class SPHCourseDBControllerCourse extends JController
 		if ( $model->store($post) ) {
 			$msg = JText::_('Course saved');
 		}
-			
 		$this->setRedirect('index.php?option=com_sphcoursedb',$msg);
 	}
 

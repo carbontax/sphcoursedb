@@ -1,12 +1,15 @@
 <?php
 defined('_JEXEC') or die("Restricted access"); 
 ?>
-<h3>
-Series: <?php echo $this->series->name; ?>
-</h3>
-
-<UL>
-<?php foreach ($this->courses as $course ) { ?>
-<LI><?php echo $course->name; ?> (<?php echo $course->number; ?>)</LI>
-<?php } ?>
-</UL>
+<table class="sphcoursedb">
+<tr>
+<th>Name</th>
+<th>Course Number</th>
+</tr>
+<?php foreach($this->courses as $course){ ?>
+<tr>
+<td><a href="<?php echo $course->link; ?>"><?php echo $course->name; ?></a></td>
+<td><?php echo $course->number; ?></td>
+</tr>
+<?php }  ?>
+</table>
