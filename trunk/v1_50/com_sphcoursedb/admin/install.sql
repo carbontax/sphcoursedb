@@ -32,7 +32,7 @@ INSERT INTO `#__sphcoursedb_courses`
 `description`,`objectives`,`course_format`) 
 VALUES (1,"TEST Course 1","5555001","Course 1 Instructor","Course 1 prerequisites",
 "Course 1 description","Course 1 objectives", "Course 1 format"), 
-(2,"TEST Course 2","5555002","Course 2 Instructor","Course 2 prerequisites",
+(1,"TEST Course 2","5555002","Course 2 Instructor","Course 2 prerequisites",
 "Course 2 description","Course 2 objectives", "Course 2 format"), 
-(3,"TEST Course 3","5555003","Course 3 Instructor","Course 3 prerequisites",
+(1,"TEST Course 3","5555003","Course 3 Instructor","Course 3 prerequisites",
 "Course 3 description","Course 3 objectives", "Course 3 format");
