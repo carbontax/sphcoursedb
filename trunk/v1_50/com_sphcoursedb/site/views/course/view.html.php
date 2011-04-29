@@ -20,7 +20,7 @@ jimport('joomla.application.component.view');
 class SPHCourseDBViewCourse extends JView
 {
 	function display($tpl =  NULL) {
-		$model =& $this->getModel();
+		$model =& $this->getModel('course');
 		$course = $this->get('Data');
 		$this->assignRef('course', $course);
 		parent::display($tpl);
