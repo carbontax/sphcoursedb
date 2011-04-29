@@ -1,7 +1,6 @@
 <?php
 /**
  * @package    ca.utoronto.med.sph
- * @subpackage Components
  * @license    GNU/GPL
  */
 
@@ -11,13 +10,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport('joomla.application.component.controller');
 
-/**
- * SPH Course DB Default Admin Controller
- *
- * @package    ca.utoronto.med.sph
- * @subpackage Components
- */
-class SPHCourseDBController extends JController
+class SPHCourseDBControllerSeries extends SPHCourseDBController
 {
 	/**
 	 * Method to display the view
@@ -26,9 +19,7 @@ class SPHCourseDBController extends JController
 	 */
 	function display()
 	{
-		if ( ! JRequest::getVar('view')) {
-			JRequest::setVar('view','courses');
-		}
+		JRequest::setVar('view','series');
 		parent::display();
 	}
 

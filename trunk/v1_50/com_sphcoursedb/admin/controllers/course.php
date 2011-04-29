@@ -11,7 +11,7 @@
 // No direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-class SPHCourseDBControllerCourse extends JController
+class SPHCourseDBControllerCourse extends SPHCourseDBController
 {
 	/**
 	 * constructor (registers additional tasks to methods)
@@ -20,7 +20,8 @@ class SPHCourseDBControllerCourse extends JController
 	function __construct()
 	{
 		parent::__construct();
-
+		JRequest::setVar( 'view', 'course' );
+		
 		// Register Extra tasks
 		$this->registerTask( 'add', 'edit' );
 	}
@@ -30,7 +31,6 @@ class SPHCourseDBControllerCourse extends JController
 	 * @return void
 	 */
 	function edit()	{
-		JRequest::setVar( 'view', 'course' );
 		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar( 'hidemainmenu', 1 );
 

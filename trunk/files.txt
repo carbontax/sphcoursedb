@@ -1,15 +1,19 @@
 
 <files folder="site">
 <filename>controller.php</filename>
+<filename>controllers/index.html</filename>
+<filename>controllers/series.php</filename>
 <filename>index.html</filename>
-<filename>models/course.php</filename>
-<filename>models/index.html</filename>
 <filename>sphcoursedb.php</filename>
 <filename>views/course/index.html</filename>
 <filename>views/course/tmpl/default.php</filename>
 <filename>views/course/tmpl/index.html</filename>
 <filename>views/course/view.html.php</filename>
 <filename>views/index.html</filename>
+<filename>views/series/index.html</filename>
+<filename>views/series/tmpl/default.php</filename>
+<filename>views/series/tmpl/index.html</filename>
+<filename>views/series/view.html.php</filename>
 </files>
 
 <files folder="admin">
@@ -44,4 +48,8 @@
 <filename>views/series/tmpl/form.php</filename>
 <filename>views/series/tmpl/index.html</filename>
 <filename>views/series/view.html.php</filename>
+<filename>views/serieslist/index.html</filename>
+<filename>views/serieslist/tmpl/default.php</filename>
+<filename>views/serieslist/tmpl/index.html</filename>
+<filename>views/serieslist/view.html.php</filename>
 </files>

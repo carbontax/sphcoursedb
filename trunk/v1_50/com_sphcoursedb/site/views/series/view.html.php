@@ -22,7 +22,7 @@ class SPHCourseDBViewCourse extends JView
 	function display($tpl =  NULL) {
 		$model =& $this->getModel();
 		$course = $this->get('Data');
-		$this->assignRef('course', $course);
+		$this->assignRef('series', $series);
 		parent::display($tpl);
 	}
 }
