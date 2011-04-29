@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+	<name>SPH Course DB</name>
+	<!-- The following elements are optional and free of formatting constraints -->
+	<author>Discovery Commons</author>
+	<creationDate>2011-04-22</creationDate>
+	<copyright>Discovery Commons, University of Toronto</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>ben.smithlea@utoronto.ca</authorEmail>
+	<authorUrl>http://dc.med.utoronto.ca</authorUrl>
+	<version>1.5.0</version>
+	<description>Content type for course catalogue for Dalla Lana School of
+		Public Health</description>
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder to copy 
+		FROM in the package to install therefore files copied in this section are 
+		copied from /site/ in the package -->
+	<files folder="site">
+		<filename>controller.php</filename>
+
+		<filename>sphcoursedb.php</filename>
+		<filename>index.html</filename>
+		<filename>models/index.html</filename>
+		<filename>models/course.php</filename>
+		<filename>views/index.html</filename>
+		<filename>views/course/index.html</filename>
+		<filename>views/course/view.html.php</filename>
+		<filename>views/course/tmpl/index.html</filename>
+		<filename>views/course/tmpl/default.php</filename>
+	</files>
+
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysql">install.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysql">uninstall.sql</file>
+		</sql>
+	</uninstall>
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu>SPH Course DB</menu>
+		<submenu>
+		<menu controller="courses">Courses</menu>
+		<menu controller="serieslist">Series</menu>
+		</submenu>
+
+		<!-- Administration Main File Copy Section -->
+		<files folder="admin">
+			<filename>controller.php</filename>
+			<filename>controllers/course.php</filename>
+			<filename>controllers/courses.php</filename>
+			<filename>controllers/index.html</filename>
+			<filename>controllers/series.php</filename>
+			<filename>controllers/serieslist.php</filename>
+			<filename>index.html</filename>
+			<filename>install.sql</filename>
+			<filename>models/course.php</filename>
+			<filename>models/courses.php</filename>
+			<filename>models/index.html</filename>
+			<filename>models/series.php</filename>
+			<filename>models/serieslist.php</filename>
+			<filename>sphcoursedb.php</filename>
+			<filename>tables/course.php</filename>
+			<filename>tables/index.html</filename>
+			<filename>tables/series.php</filename>
+			<filename>uninstall.sql</filename>
+			<filename>views/course/index.html</filename>
+			<filename>views/course/tmpl/form.php</filename>
+			<filename>views/course/tmpl/index.html</filename>
+			<filename>views/course/view.html.php</filename>
+			<filename>views/courses/index.html</filename>
+			<filename>views/courses/tmpl/default.php</filename>
+			<filename>views/courses/tmpl/index.html</filename>
+			<filename>views/courses/view.html.php</filename>
+			<filename>views/index.html</filename>
+			<filename>views/series/index.html</filename>
+			<filename>views/series/tmpl/form.php</filename>
+			<filename>views/series/tmpl/index.html</filename>
+			<filename>views/series/view.html.php</filename>
+		</files>
+	</administration>
+</install>
+
