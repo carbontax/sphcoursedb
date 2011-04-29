@@ -1,6 +1,10 @@
 <?php
 defined('_JEXEC') or die("Restricted access"); 
 ?>
+<H2><?php echo $this->series->name ?> Courses</H2>
+<?php if ( count($this->courses) == 0 ) {?>
+<div class="sphcoursedb">There are no active courses in the Series.</div>
+<?php } else { ?>
 <table class="sphcoursedb">
 <tr>
 <th>Name</th>
@@ -13,3 +17,4 @@ defined('_JEXEC') or die("Restricted access");
 </tr>
 <?php }  ?>
 </table>
+<?php } // end if (count($this->courses ?>
