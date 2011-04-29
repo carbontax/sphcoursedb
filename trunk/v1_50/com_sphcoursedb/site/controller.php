@@ -20,9 +20,11 @@ jimport('joomla.application.component.controller');
 class SPHCourseDBController extends JController
 {
 	function __construct() {
+		parent::__construct();
+		
 		$this->addModelPath(JPATH_COMPONENT_ADMINISTRATOR.DS.'models');
 		if ( ! JRequest::getVar('view') ) {
-			JRequest::setVar('view','course');
+			JRequest::setVar('view','serieslist');
 		}
 	}
 	/**
@@ -32,6 +34,9 @@ class SPHCourseDBController extends JController
 	 */
 	function display()
 	{
+/*		if ( ! JRequest::getVar('view') ) {
+			JRequest::setVar('view','serieslist');
+		} */
 		parent::display();
 	}
 
