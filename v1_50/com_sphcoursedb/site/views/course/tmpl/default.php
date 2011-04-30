@@ -16,7 +16,7 @@ defined('_JEXEC') or die("Restricted access");
 </tr>
 <tr>
 <th>Co/Prerequisites</th>
-<td><?php echo $this->course->prerequisites; ?></td>
+<td><?php echo $this->course->prereqs; ?></td>
 </tr>
 <tr>
 <th>Description</th>

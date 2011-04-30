@@ -20,7 +20,7 @@ CREATE TABLE `#__sphcoursedb_courses` (
 `name` VARCHAR(255) NOT NULL,
 `number` VARCHAR(255) NOT NULL,
 `instructor` TEXT,
-`prerequisites` TEXT,
+`prereqs` TEXT,
 `description` TEXT,
 `objectives` TEXT,
 `course_format` TEXT,
@@ -28,7 +28,7 @@ PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 INSERT INTO `#__sphcoursedb_courses` 
-(`series_id`,`name`,`number`,`instructor`,`prerequisites`,
+(`series_id`,`name`,`number`,`instructor`,`prereqs`,
 `description`,`objectives`,`course_format`) 
 VALUES (1,"TEST Course 1","5555001","Course 1 Instructor","Course 1 prerequisites",
 "Course 1 description","Course 1 objectives", "Course 1 format"), 
