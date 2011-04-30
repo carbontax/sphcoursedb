@@ -41,7 +41,7 @@ class TableCourse extends JTable
 	/**
 	 * @var string
 	 */
-	var $prerequisites = null;
+	var $prereqs = null;
 	
 		/**
 	 * @var string

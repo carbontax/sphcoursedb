@@ -44,12 +44,12 @@
 				</tr>
 				<tr>
 					<td width="100" align="right" class="key"><label
-						for="prerequisites"> <?php echo JText::_( 'Co/Prerequisites' ); ?>:
+						for="prereqs"> <?php echo JText::_( 'Co/Prerequisites' ); ?>:
 					</label>
 					</td>
 					<td><?php 
 					$editor =& JFactory::getEditor();
-					echo $editor->display('prerequisites', $this->course->prerequisites, '550', '200', '60', '20', false);
+					echo $editor->display('prereqs', $this->course->prereqs, '550', '200', '60', '20', false);
 					?>
 				</tr>
 				<tr>

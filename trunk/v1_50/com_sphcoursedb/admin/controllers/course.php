@@ -43,7 +43,7 @@ class SPHCourseDBControllerCourse extends JController
 		//special handling for editor fields
 		$post = JRequest::get('post');
 		$post['instructor'] = JRequest::getVar('instructor','','post','string',JREQUEST_ALLOWRAW);
-		$post['prerequesites'] = JRequest::getVar('prerequesites','','post','string',JREQUEST_ALLOWRAW);
+		$post['prereqs'] = JRequest::getVar('prereqs','','post','string',JREQUEST_ALLOWRAW);
 		$post['description'] = JRequest::getVar('description','','post','string',JREQUEST_ALLOWRAW);
 		$post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
 		$post['course_format'] = JRequest::getVar('course_format','','post','string',JREQUEST_ALLOWRAW);
