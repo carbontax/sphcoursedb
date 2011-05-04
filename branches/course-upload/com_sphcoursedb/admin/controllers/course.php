@@ -39,6 +39,7 @@ class SPHCourseDBControllerCourse extends JController
 
 	function save()	{
 		JRequest::checkToken() or jexit('Invalid Token');
+		$msg = array();
 
 		//special handling for editor fields
 		$post = JRequest::get('post');
@@ -48,32 +49,32 @@ class SPHCourseDBControllerCourse extends JController
 		$post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
 		$post['course_format'] = JRequest::getVar('course_format','','post','string',JREQUEST_ALLOWRAW);
 		/* Handle File Upload */
-		$file = JRequest::getVar('file_upload');
-		jimport('joomla.filesystem.file');
-		//Clean up filename to get rid of strange characters like spaces etc
-		$filename = JFile::makeSafe($file['name']);
-		$src = $file['tmp_name'];
-		$dest = JPATH . DS . "images" . DS . "sphcoursedb" . DS . $filename;
-
-		//First check if the file has the right extension, we need jpg only
-		if ( strtolower(JFile::getExt($filename) ) == 'doc') {
-			if ( JFile::upload($src, $dest) ) {
-				$post['syllabus'] = JURI::base() . "/images/sphcoursedb/" . $filename;
-				//Redirect to a page of your choice
-			} else {
-				$msg = JText::_('Error uploading syllabus file.');
-			}
+		$file = $_FILES['file_upload'];
+		if ($file['error']) {
+			$msg[] = $file['error'];
 		} else {
-			$msg = JText::_('Syllabus file is not an accepted file type.');
+			jimport('joomla.filesystem.file');
+			//Clean up filename to get rid of strange characters like spaces etc
+			$post['syllabus_name'] = JFile::makeSafe($file['name']);
+			$post['syllabus_type'] = $file['type'];
+			$post['syllabus_size'] = $file['size'];
+			$src = $file['tmp_name'];
+			//		$dest = JPATH . DS . "images" . DS . "sphcoursedb" . DS . $filename;
+			if ( strtolower(JFile::getExt($post['syllabus_name']) ) == 'doc') {
+				$fp = fopen($src, 'r');
+				$content = fread($fp,$file['size']);
+				$post['syllabus_content'] = addslashes($content);
+			} else {
+				$msg[] = JText::_('Syllabus file is not an accepted file type.');
+			}
 		}
-
 		$model = $this->getModel('course');
-		$msg .= JText::_('Error saving course');
+		$msg[] = JText::_('Error saving course');
 
 		if ( $model->store($post) ) {
-			$msg = JText::_('Course saved');
+			$msg[count($msg)-1] = JText::_('Course saved');
 		}
-		$this->setRedirect('index.php?option=com_sphcoursedb',$msg);
+		$this->setRedirect('index.php?option=com_sphcoursedb',implode(" ", $msg));
 	}
 
 	function remove() {
