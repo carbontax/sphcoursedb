@@ -79,6 +79,12 @@
 					echo $editor->display('course_format', $this->course->course_format, '550', '100', '60', '20', false);
 					?>
 				</tr>
+				<tr>
+					<td width="100" align="right" class="key"><label
+						for="file_upload"> <?php echo JText::_( 'Upload Syllabus' ); ?>: </label>
+					</td>
+					<td><input class="file_upload" type="file" name="file_upload" /></td>
+				</tr>
 
 			</table>
 		</fieldset>
