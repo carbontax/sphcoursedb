@@ -94,5 +94,8 @@
 			<filename>views/serieslist/view.html.php</filename>
 		</files>
 	</administration>
+	
+	<installfile>install.sphcoursedb.php</installfile>
+
 </install>
 
