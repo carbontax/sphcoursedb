@@ -47,9 +47,29 @@ class SPHCourseDBControllerCourse extends JController
 		$post['description'] = JRequest::getVar('description','','post','string',JREQUEST_ALLOWRAW);
 		$post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
 		$post['course_format'] = JRequest::getVar('course_format','','post','string',JREQUEST_ALLOWRAW);
+		/* Handle File Upload */
+		$file = JRequest::getVar('file_upload');
+		jimport('joomla.filesystem.file');
+		//Clean up filename to get rid of strange characters like spaces etc
+		$filename = JFile::makeSafe($file['name']);
+		$src = $file['tmp_name'];
+		$dest = JPATH . DS . "images" . DS . "sphcoursedb" . DS . $filename;
+
+		//First check if the file has the right extension, we need jpg only
+		if ( strtolower(JFile::getExt($filename) ) == 'doc') {
+			if ( JFile::upload($src, $dest) ) {
+				$post['syllabus'] = JURI::base() . "/images/sphcoursedb/" . $filename;
+				//Redirect to a page of your choice
+			} else {
+				$msg = JText::_('Error uploading syllabus file.');
+			}
+		} else {
+			$msg = JText::_('Syllabus file is not an accepted file type.');
+		}
 
 		$model = $this->getModel('course');
-		$msg = JText::_('Error saving course');
+		$msg .= JText::_('Error saving course');
+
 		if ( $model->store($post) ) {
 			$msg = JText::_('Course saved');
 		}
@@ -58,7 +78,6 @@ class SPHCourseDBControllerCourse extends JController
 
 	function remove() {
 		$model = $this->getModel('course');
-
 		$msg = JText::_('Error removing course(s)');
 		if ( $model->delete() ) {
 			$msg = JText::_('Course(s) removed');
