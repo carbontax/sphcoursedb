@@ -58,6 +58,26 @@ class TableCourse extends JTable
 	 */
 	var $course_format = null;
 	
+	/**
+	 * @var string
+	 */
+	var $syllabus_name = null;
+	
+		/**
+	 * @var string
+	 */
+	var $syllabus_type = null;
+	
+	/**
+	 * @var int
+	 */
+	var $syllabus_size = null;
+	
+	/**
+	 * @var string
+	 */
+	var $syllabus_content = null;
+	
 /**
 	 * Constructor
 	 *

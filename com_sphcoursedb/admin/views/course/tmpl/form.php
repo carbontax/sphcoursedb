@@ -1,6 +1,6 @@
 <?php defined('_JEXEC') or die('Restricted access'); ?>
 
-<form action="index.php" method="post" name="adminForm" id="adminForm">
+<form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
 	<div class="col100">
 		<fieldset class="adminform">
 			<legend>
@@ -83,7 +83,8 @@
 					<td width="100" align="right" class="key"><label
 						for="file_upload"> <?php echo JText::_( 'Upload Syllabus' ); ?>: </label>
 					</td>
-					<td><input class="file_upload" type="file" name="file_upload" /></td>
+					<td><input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+					<input class="file_upload" type="file" name="file_upload" /></td>
 				</tr>
 
 			</table>
@@ -93,7 +94,7 @@
 	<div class="clr"></div>
 
 	<input type="hidden" name="option" value="com_sphcoursedb" /> 
-	<input type="hidden" name="id" value="<?php echo $this->course->id; ?>" /> 
+	<input type="hidden" name="id" value="<?php echo $this->course->id; ?>" />
 	<input type="hidden" name="task" value="" /> 
 	<input type="hidden" name="controller" value="course" />
 	<?php echo JHTML::_( 'form.token' ); ?>

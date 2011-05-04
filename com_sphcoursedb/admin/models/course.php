@@ -55,7 +55,7 @@ class SPHCourseDBModelCourse extends JModel
 			$this->_data->description = null;
 			$this->_data->objectives = null;
 			$this->_data->course_format = null;
-			$this->_data->syllabus = null;
+			$this->_data->syllabus_name = null;
 		}
 		return $this->_data;
 	}
