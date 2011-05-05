@@ -1,6 +1,7 @@
 <?php defined('_JEXEC') or die('Restricted access'); ?>
 
-<form action="index.php" method="post" name="adminForm" id="adminForm">
+<form action="index.php" method="post" name="adminForm" id="adminForm"
+	enctype="multipart/form-data">
 	<div class="col100">
 		<fieldset class="adminform">
 			<legend>
@@ -43,14 +44,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="100" align="right" class="key"><label
-						for="prereqs"> <?php echo JText::_( 'Co/Prerequisites' ); ?>:
+					<td width="100" align="right" class="key"><label for="prereqs"> <?php echo JText::_( 'Co/Prerequisites' ); ?>:
 					</label>
 					</td>
 					<td><?php 
 					$editor =& JFactory::getEditor();
 					echo $editor->display('prereqs', $this->course->prereqs, '550', '200', '60', '20', false);
 					?>
+				
 				</tr>
 				<tr>
 					<td width="100" align="right" class="key"><label for="description">
@@ -60,6 +61,7 @@
 					$editor =& JFactory::getEditor();
 					echo $editor->display('description', $this->course->description, '550', '400', '60', '20', false);
 					?>
+				
 				</tr>
 				<tr>
 					<td width="100" align="right" class="key"><label for="objectives">
@@ -69,6 +71,7 @@
 					$editor =& JFactory::getEditor();
 					echo $editor->display('objectives', $this->course->objectives, '550', '200', '60', '20', false);
 					?>
+				
 				</tr>
 				<tr>
 					<td width="100" align="right" class="key"><label
@@ -78,17 +81,36 @@
 					$editor =& JFactory::getEditor();
 					echo $editor->display('course_format', $this->course->course_format, '550', '100', '60', '20', false);
 					?>
+				
 				</tr>
-
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend>Syllabus Upload</legend>
+			<table>
+				<tr>
+					<td width="100" align="right" class="key"><label>
+					<?php echo JText::_( 'Current Syllabus File' ); ?>: </label>
+					</td>
+					<td><?php echo $this->syllabus_link; ?>
+					<?php echo $this->syllabus_details; ?></td>
+				</tr>
+				<tr>
+					<td width="100" align="right" class="key"><label for="file_upload">
+					<?php echo JText::_( 'Upload Syllabus' ); ?>: </label>
+					</td>
+					<td><input type="hidden" name="MAX_FILE_SIZE" value="2000000" /> <input
+						class="file_upload" type="file" name="file_upload" /></td>
+				</tr>
 			</table>
 		</fieldset>
 	</div>
 
 	<div class="clr"></div>
 
-	<input type="hidden" name="option" value="com_sphcoursedb" /> 
-	<input type="hidden" name="id" value="<?php echo $this->course->id; ?>" /> 
-	<input type="hidden" name="task" value="" /> 
-	<input type="hidden" name="controller" value="course" />
-	<?php echo JHTML::_( 'form.token' ); ?>
+	<input type="hidden" name="option" value="com_sphcoursedb" /> <input
+		type="hidden" name="id" value="<?php echo $this->course->id; ?>" /> <input
+		type="hidden" name="task" value="" /> <input type="hidden"
+		name="controller" value="course" />
+		<?php echo JHTML::_( 'form.token' ); ?>
 </form>

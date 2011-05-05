@@ -1,7 +1,7 @@
 <?php
 /**
  * Course table class
- * 
+ *
  */
 
 // No direct access
@@ -32,33 +32,53 @@ class TableCourse extends JTable
 	 * @var string
 	 */
 	var $number = null;
-	
+
 	/**
 	 * @var string
 	 */
 	var $instructor = null;
-	
+
 	/**
 	 * @var string
 	 */
 	var $prereqs = null;
-	
-		/**
+
+	/**
 	 * @var string
 	 */
 	var $description = null;
-	
+
 	/**
 	 * @var string
 	 */
 	var $objectives = null;
-	
+
 	/**
 	 * @var string
 	 */
 	var $course_format = null;
-	
-/**
+
+	/**
+	 * @var string
+	 */
+	var $syllabus_name = null;
+
+	/**
+	 * @var string
+	 */
+	var $syllabus_type = null;
+
+	/**
+	 * @var int
+	 */
+	var $syllabus_size = null;
+
+	/**
+	 * @var string
+	 */
+	var $syllabus_content = null;
+
+	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

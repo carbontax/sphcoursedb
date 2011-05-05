@@ -40,7 +40,11 @@ class SPHCourseDBModelCourse extends JModel
 
 	function &getData() {
 		if ( empty($this->_data) ) {
-			$query = "SELECT * FROM `#__sphcoursedb_courses` WHERE id=" . $this->_id;
+			/* we specify the fields so we can skip syllabus_content */
+			$query = "SELECT id, series_id, name, number, instructor, "
+			. "prereqs, description, objectives, course_format, "
+			. "syllabus_name, syllabus_type, syllabus_size "
+			."FROM `#__sphcoursedb_courses` WHERE id=" . $this->_id;
 			$this->_db->setQuery($query);
 			$this->_data = $this->_db->loadObject();
 		}
@@ -51,10 +55,13 @@ class SPHCourseDBModelCourse extends JModel
 			$this->_data->name = null;
 			$this->_data->number = null;
 			$this->_data->instructor = null;
-			$this->_data->prerequisites = null;
+			$this->_data->prereqs = null;
 			$this->_data->description = null;
 			$this->_data->objectives = null;
 			$this->_data->course_format = null;
+			$this->_data->syllabus_name = null;
+			$this->_data->syllabus_size = null;
+			$this->_data->syllabus_type = null;
 		}
 		return $this->_data;
 	}
