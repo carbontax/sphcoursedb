@@ -24,6 +24,10 @@ CREATE TABLE `#__sphcoursedb_courses` (
 `description` TEXT,
 `objectives` TEXT,
 `course_format` TEXT,
+`syllabus_name` VARCHAR(255),
+`syllabus_type` VARCHAR(255),
+`syllabus_size` INT(11),
+`syllabus_content` MEDIUMBLOB,
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
