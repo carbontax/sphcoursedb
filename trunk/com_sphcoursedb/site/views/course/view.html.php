@@ -4,13 +4,13 @@
  * @subpackage Components
  * @license    GNU/GPL
  */
- 
+
 // No direct access
- 
+
 defined( '_JEXEC' ) or die( 'Restricted access' );
- 
+
 jimport('joomla.application.component.view');
- 
+
 /**
  * SPH Course DB Component Controller
  *
@@ -20,11 +20,11 @@ jimport('joomla.application.component.view');
 class SPHCourseDBViewCourse extends JView
 {
 	function display($tpl =  NULL) {
-		$message = "School of Public Health courses view";
-		$this->assignRef('message', $message);
+
+		$model =& $this->getModel();
 		
-		$model =& $this->getModel('course');
-		$this->assignRef('course', $this->get('Name'));
+		$course = $this->get('Data');
+		$this->assignRef('course',$course);
 		parent::display($tpl);
 	}
 }
