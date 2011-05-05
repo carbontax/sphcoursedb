@@ -95,7 +95,7 @@
 		</files>
 	</administration>
 	
-	<installfile>install.sphcoursedb.php</installfile>
+<!-- <installfile>install.sphcoursedb.php</installfile> -->
 
 </install>
 

@@ -99,4 +99,19 @@ class SPHCourseDBModelCourse extends JModel
 		return true;
 	}
 
+
+	/**
+	 * @return a link to the syllabus upload if it exists, or an empty string.
+	 */
+	function syllabus_link() {
+		if ( $this->_data->syllabus_name ) {
+			return JHTML::link('index.php?option=com_sphcoursedb&controller=course&cid=' . $this->_id,
+			$this->_data->syllabus_name,
+			array('target' => '_blank'));
+		}
+		else {
+			return '';
+		}
+	}
+
 }
