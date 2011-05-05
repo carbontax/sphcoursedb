@@ -90,4 +90,21 @@ class SPHCourseDBControllerCourse extends JController
 	function cancel() {
 		$this->setRedirect('index.php?option=com_sphcoursedb','Operation cancelled');
 	}
+
+	function syllabus() {
+		$course =& JTable::getInstance('course');
+		$course->load(JRequest::getVar('cid',0,'get','int'));
+		if ( $course->get('syllabus_name') ) {
+			header('Content-Disposition: attachment; filename='.$course->get('syllabus_name'));
+			header('Content-Length: '.strlen($course->get('syllabus_size')));
+			header('Connection: close');
+			header('Content-Type: ' . $course->get('syllabus_type') . '; name='.$course->get('syllabus_name'));
+			header('Cache-Control: store, cache');
+			header('Pragma: cache');
+		}
+		else {
+			JError::raiseWarning('FILE_NOT_FOUND','Could not find the syllabus document: '
+			. $course->get('syllabus_name'));
+		}
+	}
 }
