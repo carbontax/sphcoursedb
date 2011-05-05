@@ -65,8 +65,10 @@ class SPHCourseDBControllerCourse extends JController
 				$fp = fopen($src, 'r');
 				$content = fread($fp,$file['size']);
 				$post['syllabus_content'] = addslashes($content);
+				$msg[] = JText::_('New syllabus file uploaded');
 			} else {
-				$msg[] = JText::_('Syllabus file was not saved because <' . $ext . '> is not an accepted file extenstion');
+				$msg[] = JText::_('Syllabus file was not saved due to unaccepted file extension') 
+				. " (" . $post['syllabus_name'] . ")";
 			}
 		}
 		$model = $this->getModel('course');
