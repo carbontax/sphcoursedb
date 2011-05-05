@@ -59,13 +59,14 @@ class SPHCourseDBControllerCourse extends JController
 			$post['syllabus_type'] = $file['type'];
 			$post['syllabus_size'] = $file['size'];
 			$src = $file['tmp_name'];
-			//		$dest = JPATH . DS . "images" . DS . "sphcoursedb" . DS . $filename;
-			if ( strtolower(JFile::getExt($post['syllabus_name']) ) == 'doc') {
+
+			$ext = strtolower(JFile::getExt($post['syllabus_name']));
+			if ( in_array($ext, array('doc','pdf','rtf')) ) {
 				$fp = fopen($src, 'r');
 				$content = fread($fp,$file['size']);
 				$post['syllabus_content'] = addslashes($content);
 			} else {
-				$msg[] = JText::_('Syllabus file is not an accepted file type.');
+				$msg[] = JText::_('Syllabus file was not saved because <' . $ext . '> is not an accepted file extenstion');
 			}
 		}
 		$model = $this->getModel('course');
@@ -74,7 +75,7 @@ class SPHCourseDBControllerCourse extends JController
 		if ( $model->store($post) ) {
 			$msg[count($msg)-1] = JText::_('Course saved');
 		}
-		$this->setRedirect('index.php?option=com_sphcoursedb',implode(" ", $msg));
+		$this->setRedirect('index.php?option=com_sphcoursedb',implode(". ", $msg));
 	}
 
 	function remove() {
@@ -92,15 +93,22 @@ class SPHCourseDBControllerCourse extends JController
 	}
 
 	function syllabus() {
-		$course =& JTable::getInstance('course');
-		$course->load(JRequest::getVar('cid',0,'get','int'));
-		if ( $course->get('syllabus_name') ) {
-			header('Content-Disposition: attachment; filename='.$course->get('syllabus_name'));
-			header('Content-Length: '.strlen($course->get('syllabus_size')));
+		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		$course =& JTable::getInstance('course','Table');
+		$ids = JRequest::getVar('cid',array(0),'get','array');
+		$course->load($ids[0]);
+		$filename = $course->get('syllabus_name');
+		$size = $course->get('syllabus_size');
+		$type = $course->get('syllabus_type');
+		if ( $filename ) {
+			header('Content-Disposition: attachment; filename="'.$filename.'"');
+			header('Content-Length: '.$size);
 			header('Connection: close');
-			header('Content-Type: ' . $course->get('syllabus_type') . '; name='.$course->get('syllabus_name'));
+			header('Content-Type: ' . $course->get('syllabus_type') . '; name="'.$filename .'"');
 			header('Cache-Control: store, cache');
 			header('Pragma: cache');
+			echo stripslashes($course->get('syllabus_content'));
+			exit;
 		}
 		else {
 			JError::raiseWarning('FILE_NOT_FOUND','Could not find the syllabus document: '
