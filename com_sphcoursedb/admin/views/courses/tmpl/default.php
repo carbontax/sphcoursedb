@@ -16,6 +16,9 @@
             <th>
                 <?php echo JText::_( 'Course Name' ); ?>
             </th>
+            <th>
+                <?php echo JText::_( 'Series' ); ?>
+            </th>
         </tr>            
     </thead>
     <?php
@@ -25,6 +28,7 @@
         $row =& $this->items[$i];
         $checked    = JHTML::_( 'grid.id', $i, $row->id );
         $link = JRoute::_( 'index.php?option=com_sphcoursedb&controller=course&task=edit&cid[]='. $row->id );
+        $series_link = JRoute::_( 'index.php?option=com_sphcoursedb&controller=series&task=edit&cid[]='. $row->series_id );
  
         ?>
         <tr class="<?php echo "row$k"; ?>">
@@ -38,7 +42,10 @@
                 <a href="<?php echo $link; ?>"><?php echo $row->number; ?></a>
             </td>
             <td>
-                <a href="<?php echo $link; ?>"><?php echo $row->name; ?></a>
+                <?php echo $row->name; ?>
+            </td>
+            <td>
+                <a href="<?php echo $series_link; ?>"><?php echo $row->series_name; ?></a>
             </td>
         </tr>
         <?php

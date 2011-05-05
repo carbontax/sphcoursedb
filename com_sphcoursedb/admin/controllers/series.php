@@ -10,7 +10,7 @@
 // No direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-class SPHCourseDBControllerSeries extends SPHCourseDBControllerSeriesList
+class SPHCourseDBControllerSeries extends SPHCourseDBController
 {
 	/**
 	 * constructor (registers additional tasks to methods)
