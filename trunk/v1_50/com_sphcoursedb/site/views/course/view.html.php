@@ -22,9 +22,22 @@ class SPHCourseDBViewCourse extends JView
 	function display($tpl =  NULL) {
 
 		$model =& $this->getModel();
-		
-		$course = $this->get('Data');
+
+		$course =& $this->get('Data');
 		$this->assignRef('course',$course);
+
+		$syllabus_link = "";
+		$syllabus_details = "";
+		if ( $course->syllabus_size > 0 ) {
+			$syllabus_link = JHTML::link('index.php?option=com_sphcoursedb&controller=course&task=syllabus&cid[]=' . $course->id,
+			$course->syllabus_name,
+			array('target' => '_blank'));
+			$syllabus_details = "(Type: " . $course->syllabus_type
+			. "; Size: " . $course->syllabus_size/1024 . " KB)";
+		}
+		$this->assignRef('syllabus_link', $syllabus_link);
+		$this->assignRef('syllabus_details', $syllabus_details);
+
 		parent::display($tpl);
 	}
 }

@@ -34,12 +34,19 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="100" align="right" class="key"><label for="instructor">
-					<?php echo JText::_( 'Instructor' ); ?>: </label>
+					<td width="100" align="right" class="key"><label for="coordinator_id"> <?php echo JText::_( 'Coordinator' ); ?>:
+					</label>
+					</td>
+					<td><?php echo $this->select_coordinator; ?>
+					</td>
+				</tr>
+				<tr>
+					<td width="100" align="right" class="key"><label for="instructor_details">
+					<?php echo JText::_( 'Instructor Details' ); ?>: </label>
 					</td>
 					<td><?php 
 					$editor =& JFactory::getEditor();
-					echo $editor->display('instructor', $this->course->instructor, '550', '75', '60', '20', false);
+					echo $editor->display('instructor_details', $this->course->instructor_details, '550', '75', '60', '20', false);
 					?>
 					</td>
 				</tr>

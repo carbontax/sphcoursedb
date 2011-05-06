@@ -58,6 +58,7 @@
 
 		<!-- Administration Main File Copy Section -->
 		<files folder="admin">
+			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<filename>controllers/course.php</filename>
 			<filename>controllers/index.html</filename>
@@ -68,6 +69,7 @@
 			<filename>models/course.php</filename>
 			<filename>models/courses.php</filename>
 			<filename>models/index.html</filename>
+			<filename>models/instructor.php</filename>
 			<filename>models/series.php</filename>
 			<filename>models/serieslist.php</filename>
 			<filename>sphcoursedb.php</filename>

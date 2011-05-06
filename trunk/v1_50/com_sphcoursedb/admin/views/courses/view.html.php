@@ -24,6 +24,7 @@ class SPHCourseDBViewCourses extends JView
 		JToolBarHelper::deleteList();
 		JToolBarHelper::editListX();
 		JToolBarHelper::addNewX();
+		JToolBarHelper::preferences('com_sphcoursedb');
 
 		// Get data from the model
 		$items =& $this->get( 'Data');
