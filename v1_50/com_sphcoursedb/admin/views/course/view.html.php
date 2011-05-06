@@ -33,14 +33,6 @@ class SPHCourseDBViewCourse extends JView
 
 		$this->assignRef('course', $course);
 
-		$db =&JFactory::getDBO();
-		$query = "SELECT id AS value, name AS text "
-		. "FROM #__sphcoursedb_series ORDER BY name";
-		$db->setQuery($query);
-		$results = $db->loadObjectList();
-		$select_series = JHTML::_('select.genericlist',$results,'series_id',
-                'class="inputbox"','value','text',$course->series_id);
-
 		$syllabus_link = "No syllabus file uploaded";
 		$syllabus_details = "";
 		if ( $course->syllabus_size > 0 ) {
@@ -48,12 +40,29 @@ class SPHCourseDBViewCourse extends JView
 			$course->syllabus_name,
 			array('target' => '_blank'));
 			$syllabus_details = "(Type: " . $course->syllabus_type
-			. "; Size: " . $course->syllabus_size/1000 . " KB)";
+			. "; Size: " . $course->syllabus_size/1024 . " KB)";
 		}
 		$this->assignRef('syllabus_link', $syllabus_link);
 		$this->assignRef('syllabus_details', $syllabus_details);
 
+		/* populate 'series_id' select input options */
+		$db =&JFactory::getDBO();
+		$query = "SELECT id AS value, name AS text "
+		. "FROM #__sphcoursedb_series ORDER BY name";
+		$db->setQuery($query);
+		$results = $db->loadObjectList();
+		$select_series = JHTML::_('select.genericlist',$results,'series_id',
+                'class="inputbox"','value','text',$course->series_id);
+		
 		$this->assignRef('select_series', $select_series);
+		
+		$query = "SELECT id AS value, CONCAT(lastname,\", \",firstname) AS text "
+		. "FROM #__comprofiler ORDER BY lastname";
+		$db->setQuery($query);
+		$results = $db->loadObjectList();
+		$select_coordinator = JHTML::_('select.genericlist',$results,'coordinator_id',
+                'class="inputbox"','value','text',$course->coordinator_id);
+		$this->assignRef('select_coordinator', $select_coordinator);
 
 		parent::display($tpl);
 	}

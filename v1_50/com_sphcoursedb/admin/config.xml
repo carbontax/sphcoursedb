@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <params>
+    <param type="text" name="syllabus_exts" default="doc" label="Syllabus File Extensions" description="Only files with extensions in this list will be accepted for upload. Separate extensions with a semicolon." />
+    <param type="text" name="syllabus_maxsize" default="2000000" label="Syllabus File Maximum Size" description="Maximum size in bytes of uploaded files (e.g. enter 2000000 for 2MB)" />
+  </params>
+</root>

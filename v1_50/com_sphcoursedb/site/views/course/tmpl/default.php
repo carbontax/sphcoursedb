@@ -30,4 +30,10 @@ defined('_JEXEC') or die("Restricted access");
 <th>Course Format</th>
 <td><?php echo $this->course->course_format; ?></td>
 </tr>
+<?php if ( $this->syllabus_link ) { ?>
+<tr>
+<th>Syllabus Download</th>
+<td><?php echo $this->syllabus_link; ?> <br /><?php echo $this->syllabus_details; ?></td>
+</tr>
+<?php }?>
 </table>

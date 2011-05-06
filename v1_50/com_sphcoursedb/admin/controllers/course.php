@@ -1,18 +1,15 @@
 <?php
 /**
  * Administrator model for Course detail
- *
- * @package    Joomla.Tutorials
- * @subpackage Components
- * @link http://docs.joomla.org/Developing_a_Model-View-Controller_Component_-_Part_4
- * @license             GNU/GPL
  */
+jimport('joomla.filesystem.file');
 
 // No direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class SPHCourseDBControllerCourse extends JController
 {
+	var $post = array();
 	/**
 	 * constructor (registers additional tasks to methods)
 	 * @return void
@@ -30,11 +27,16 @@ class SPHCourseDBControllerCourse extends JController
 	 * @return void
 	 */
 	function edit()	{
-		JRequest::setVar( 'view', 'course' );
-		JRequest::setVar( 'layout', 'form'  );
+		/*		JRequest::setVar( 'view', 'course' ); 
+		JRequest::setVar( 'layout', 'form'  );*/
 		JRequest::setVar( 'hidemainmenu', 1 );
-
-		parent::display();
+		
+		$view =& $this->getView('course','html');
+		$view->setModel($this->getModel('course','SPHCourseDBModel'),true);
+		$view->setModel($this->getModel('instructor','SPHCourseDBModel'));
+		$view->setLayout('form');
+		$view->display();
+		//		parent::display();
 	}
 
 	function save()	{
@@ -42,39 +44,52 @@ class SPHCourseDBControllerCourse extends JController
 		$msg = array();
 
 		//special handling for editor fields
-		$post = JRequest::get('post');
-		$post['instructor'] = JRequest::getVar('instructor','','post','string',JREQUEST_ALLOWRAW);
-		$post['prereqs'] = JRequest::getVar('prereqs','','post','string',JREQUEST_ALLOWRAW);
-		$post['description'] = JRequest::getVar('description','','post','string',JREQUEST_ALLOWRAW);
-		$post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
-		$post['course_format'] = JRequest::getVar('course_format','','post','string',JREQUEST_ALLOWRAW);
+		$this->post = JRequest::get('post');
+		$this->post['instructor'] = JRequest::getVar('instructor','','post','string',JREQUEST_ALLOWRAW);
+		$this->post['prereqs'] = JRequest::getVar('prereqs','','post','string',JREQUEST_ALLOWRAW);
+		$this->post['description'] = JRequest::getVar('description','','post','string',JREQUEST_ALLOWRAW);
+		$this->post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
+		$this->post['course_format'] = JRequest::getVar('course_format','','post','string',JREQUEST_ALLOWRAW);
 		/* Handle File Upload */
 		$file = $_FILES['file_upload'];
 		if ($file['error']) {
 			$msg[] = $file['error'];
+			$this->clearSyllabus();
 		} else {
-			jimport('joomla.filesystem.file');
 			//Clean up filename to get rid of strange characters like spaces etc
-			$post['syllabus_name'] = JFile::makeSafe($file['name']);
-			$post['syllabus_type'] = $file['type'];
-			$post['syllabus_size'] = $file['size'];
+			$this->post['syllabus_name'] = JFile::makeSafe($file['name']);
+			$this->post['syllabus_type'] = $file['type'];
+			$this->post['syllabus_size'] = $file['size'];
 			$src = $file['tmp_name'];
 
-			$ext = strtolower(JFile::getExt($post['syllabus_name']));
-			if ( in_array($ext, array('doc','pdf','rtf')) ) {
-				$fp = fopen($src, 'r');
-				$content = fread($fp,$file['size']);
-				$post['syllabus_content'] = addslashes($content);
-				$msg[] = JText::_('New syllabus file uploaded');
-			} else {
-				$msg[] = JText::_('Syllabus file was not saved due to unaccepted file extension') 
-				. " (" . $post['syllabus_name'] . ")";
+			$params = JComponentHelper::getParams('com_sphcoursedb');
+
+			if ( $this->post->syllabus_size > $params->get('syllabus_maxsize') ) {
+				$this->clearSyllabus();
+				$msg[] = JText::_('Syllabus file was not saved. It is too large')
+				. " (" . $params->get('syllabus_maxsize') . ")";
+			}
+			else {
+				//todo -- fix this control flow ugliness
+				$ext = strtolower(JFile::getExt($this->post['syllabus_name']));
+				$syllabus_exts = $params->get('syllabus_exts');
+				$allowed = explode(';',$syllabus_exts);
+				if ( in_array($ext, $allowed) ) {
+					$fp = fopen($src, 'r');
+					$content = fread($fp,$file['size']);
+					$this->post['syllabus_content'] = addslashes($content);
+					$msg[] = JText::_('New syllabus file uploaded');
+				} else {
+					$this->clearSyllabus();
+					$msg[] = JText::_('Syllabus file was not saved due to unaccepted file extension')
+					. " (" . $ext . ")";
+				}
 			}
 		}
 		$model = $this->getModel('course');
 		$msg[] = JText::_('Error saving course');
 
-		if ( $model->store($post) ) {
+		if ( $model->store($this->post) ) {
 			$msg[count($msg)-1] = JText::_('Course saved');
 		}
 		$this->setRedirect('index.php?option=com_sphcoursedb',implode(". ", $msg));
@@ -94,6 +109,10 @@ class SPHCourseDBControllerCourse extends JController
 		$this->setRedirect('index.php?option=com_sphcoursedb','Operation cancelled');
 	}
 
+	/**
+	 * @todo Move this task into a helper available to both admin and site controllers
+	 * Handle resolving 'syllabus' task into a file download stream
+	 */
 	function syllabus() {
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$course =& JTable::getInstance('course','Table');
@@ -116,5 +135,12 @@ class SPHCourseDBControllerCourse extends JController
 			JError::raiseWarning('FILE_NOT_FOUND','Could not find the syllabus document: '
 			. $course->get('syllabus_name'));
 		}
+	}
+
+	function clearSyllabus() {
+		$this->post['syllabus_name'] = null;
+		$this->post['syllabus_type'] = null;
+		$this->post['syllabus_size'] = null;
+		$this->post['syllabus_content'] = null;
 	}
 }
