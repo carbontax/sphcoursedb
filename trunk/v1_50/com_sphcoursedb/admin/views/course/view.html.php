@@ -18,6 +18,7 @@ class SPHCourseDBViewCourse extends JView
 	function display($tpl = null)
 	{
 		//get the hello
+//		$model =& $this->getModel('course');
 		$course =& $this->get('Data');
 		$isNew = ($course->id < 1);
 

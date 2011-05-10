@@ -27,16 +27,16 @@ class SPHCourseDBControllerCourse extends JController
 	 * @return void
 	 */
 	function edit()	{
-		/*		JRequest::setVar( 'view', 'course' ); 
-		JRequest::setVar( 'layout', 'form'  );*/
+		JRequest::setVar( 'view', 'course' ); 
+		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar( 'hidemainmenu', 1 );
 		
-		$view =& $this->getView('course','html');
-		$view->setModel($this->getModel('course','SPHCourseDBModel'),true);
-		$view->setModel($this->getModel('instructor','SPHCourseDBModel'));
+/*		$view =& $this->getView('course','html');
+//		$view->setModel($this->getModel('course','SPHCourseDBModel'),true);
+//		$view->setModel($this->getModel('instructor','SPHCourseDBModel'));
 		$view->setLayout('form');
-		$view->display();
-		//		parent::display();
+		$view->display(); */
+		parent::display();
 	}
 
 	function save()	{
@@ -45,7 +45,7 @@ class SPHCourseDBControllerCourse extends JController
 
 		//special handling for editor fields
 		$this->post = JRequest::get('post');
-		$this->post['instructor'] = JRequest::getVar('instructor','','post','string',JREQUEST_ALLOWRAW);
+		$this->post['instructor_details'] = JRequest::getVar('instructor_details','','post','string',JREQUEST_ALLOWRAW);
 		$this->post['prereqs'] = JRequest::getVar('prereqs','','post','string',JREQUEST_ALLOWRAW);
 		$this->post['description'] = JRequest::getVar('description','','post','string',JREQUEST_ALLOWRAW);
 		$this->post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
