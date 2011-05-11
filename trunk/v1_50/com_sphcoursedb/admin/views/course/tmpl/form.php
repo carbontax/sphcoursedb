@@ -41,6 +41,13 @@
 					</td>
 				</tr>
 				<tr>
+					<td width="100" align="right" class="key"><label for="instructors"> <?php echo JText::_( 'Instructors' ); ?>:
+					</label>
+					</td>
+					<td><?php echo $this->select_instructors; ?>
+					</td>
+				</tr>
+				<tr>
 					<td width="100" align="right" class="key"><label for="instructor_details">
 					<?php echo JText::_( 'Instructor Details' ); ?>: </label>
 					</td>

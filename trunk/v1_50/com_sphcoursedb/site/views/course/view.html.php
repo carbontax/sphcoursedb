@@ -40,6 +40,9 @@ class SPHCourseDBViewCourse extends JView
 		
 		$coordinator =& $this->get('Coordinator');
 		$this->assignRef('coordinator', $coordinator);
+		
+		$instructors =& $this->get('Instructors');
+		$this->assignRef('instructors',$instructors);
 
 		parent::display($tpl);
 	}

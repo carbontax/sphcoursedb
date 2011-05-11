@@ -27,15 +27,10 @@ class SPHCourseDBControllerCourse extends JController
 	 * @return void
 	 */
 	function edit()	{
-		JRequest::setVar( 'view', 'course' ); 
+		JRequest::setVar( 'view', 'course' );
 		JRequest::setVar( 'layout', 'form'  );
 		JRequest::setVar( 'hidemainmenu', 1 );
-		
-/*		$view =& $this->getView('course','html');
-//		$view->setModel($this->getModel('course','SPHCourseDBModel'),true);
-//		$view->setModel($this->getModel('instructor','SPHCourseDBModel'));
-		$view->setLayout('form');
-		$view->display(); */
+
 		parent::display();
 	}
 
@@ -50,6 +45,10 @@ class SPHCourseDBControllerCourse extends JController
 		$this->post['description'] = JRequest::getVar('description','','post','string',JREQUEST_ALLOWRAW);
 		$this->post['objectives'] = JRequest::getVar('objectives','','post','string',JREQUEST_ALLOWRAW);
 		$this->post['course_format'] = JRequest::getVar('course_format','','post','string',JREQUEST_ALLOWRAW);
+
+		// handle multiple select values for instructors
+		$this->post['instructors'] = implode(',',$this->post['instructors']);
+
 		/* Handle File Upload */
 		$file = $_FILES['file_upload'];
 		if ($file['error']) {
