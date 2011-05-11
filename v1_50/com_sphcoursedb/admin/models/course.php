@@ -19,6 +19,7 @@ class SPHCourseDBModelCourse extends JModel
 	var $_data;
 	var $_id;
 	var $_coordinator;
+	var $_instructors;
 
 	function __construct() {
 		parent::__construct();
@@ -37,6 +38,8 @@ class SPHCourseDBModelCourse extends JModel
 	function setId($id) {
 		$this->_id = $id;
 		$this->_data = null;
+		$this->_coordinator = null;
+		$this->_instructors = array();
 	}
 
 	function &getData() {
@@ -66,6 +69,8 @@ class SPHCourseDBModelCourse extends JModel
 			$this->_data->syllabus_name = null;
 			$this->_data->syllabus_size = null;
 			$this->_data->syllabus_type = null;
+			$this->_coordinator = null;
+			$this->_instructors = array();
 		}
 		return $this->_data;
 	}
@@ -79,6 +84,18 @@ class SPHCourseDBModelCourse extends JModel
 		return $this->_coordinator;
 	}
 
+	function &getInstructors() {
+		if ( ! count($this->_instructors) ) {
+			$instructor_ids = explode(',',$this->_data->instructors);
+			foreach ( $instructor_ids as $i ) {
+				$c =& JModel::getInstance('instructor','SPHCourseDBModel');
+				$c->setId($i);
+				$this->_instructors[] =& $c->getData();
+			}
+			return $this->_instructors;
+		}
+	}
+
 	/**
 	 * This store method takes an optional POST array
 	 * to allow for RAW html from editor inputs.
@@ -90,7 +107,7 @@ class SPHCourseDBModelCourse extends JModel
 		if ($data == null ) {
 			$data = JRequest::get('post');
 		}
-		if ( !$row->bind($data,'coordinator') ) {
+		if ( !$row->bind($data) ) {
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}

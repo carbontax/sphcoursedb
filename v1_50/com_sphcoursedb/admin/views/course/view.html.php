@@ -56,7 +56,7 @@ class SPHCourseDBViewCourse extends JView
                 'class="inputbox"','value','text',$course->series_id);
 		
 		$this->assignRef('select_series', $select_series);
-		
+				
 		$query = "SELECT id AS value, CONCAT(lastname,\", \",firstname) AS text "
 		. "FROM #__comprofiler ORDER BY lastname";
 		$db->setQuery($query);
@@ -64,6 +64,11 @@ class SPHCourseDBViewCourse extends JView
 		$select_coordinator = JHTML::_('select.genericlist',$results,'coordinator_id',
                 'class="inputbox"','value','text',$course->coordinator_id);
 		$this->assignRef('select_coordinator', $select_coordinator);
+		
+		// populate multiple select input for instructors
+		$select_instructors = JHTML::_('select.genericlist',$results,'instructors[]',
+                'class="inputbox" multiple="multiple"','value','text',$course->instructors);
+		$this->assignRef('select_instructors', $select_instructors);
 
 		parent::display($tpl);
 	}
