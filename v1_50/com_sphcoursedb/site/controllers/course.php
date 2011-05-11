@@ -26,8 +26,13 @@ class SPHCourseDBControllerCourse extends SPHCourseDBController
      */
     function display()
     {
-    	JRequest::setVar('view','course');
-        parent::display();
+//    	JRequest::setVar('view','course');
+//        parent::display();
+		$view =& $this->getView('course','html');
+		$view->setModel($this->getModel('course','SPHCourseDBModel'),true);
+		$view->setLayout('default');
+		$view->display();
+    	
     }
     
 	/**

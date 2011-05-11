@@ -21,8 +21,8 @@ class SPHCourseDBModelInstructor extends JModel
 
 	function __construct() {
 		parent::__construct();
-			
-		$array = JRequest::getVar('cid',0,'','array');
+		
+		$array = JRequest::getVar('coordinator_id',array(0),'','array');
 		$this->setId((int)$array[0]);
 	}
 
@@ -41,7 +41,9 @@ class SPHCourseDBModelInstructor extends JModel
 	function &getData() {
 		if ( empty($this->_data) ) {
 			// we are only interested in generating links to Community Builder
-			$query = "SELECT id,firstname,lastname FROM `#__comprofiler` WHERE id=" . $this->_id;
+			$query = "SELECT id, firstname, lastname, "
+			. " CONCAT(\"<a href='index.php?option=com_comprofiler&task=userprofile&user=\",id,\"'>\",firstname,\" \",lastname,\"</a>\") AS link "
+			. " FROM `#__comprofiler` WHERE id=" . $this->_id;
 			$this->_db->setQuery($query);
 			$this->_data = $this->_db->loadObject();
 		}
@@ -50,10 +52,11 @@ class SPHCourseDBModelInstructor extends JModel
 			$this->_id = 0;
 			$this->_data->firstname = null;
 			$this->_data->lastname = null;
+			$this->_data->link = null;
 		}
 		return $this->_data;
 	}
-
+	
 	/**
 	 * This store method takes an optional POST array
 	 * to allow for RAW html from editor inputs.

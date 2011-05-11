@@ -21,7 +21,7 @@ class SPHCourseDBViewCourse extends JView
 {
 	function display($tpl =  NULL) {
 
-		$model =& $this->getModel();
+		$model =& $this->getModel('course');
 
 		$course =& $this->get('Data');
 		$this->assignRef('course',$course);
@@ -37,6 +37,9 @@ class SPHCourseDBViewCourse extends JView
 		}
 		$this->assignRef('syllabus_link', $syllabus_link);
 		$this->assignRef('syllabus_details', $syllabus_details);
+		
+		$coordinator =& $this->get('Coordinator');
+		$this->assignRef('coordinator', $coordinator);
 
 		parent::display($tpl);
 	}
