@@ -12,7 +12,12 @@ defined('_JEXEC') or die("Restricted access");
 </tr>
 <tr>
 <th>Instructor</th>
-<td><?php echo $this->course->instructor; ?></td>
+<td><?php 
+if ($this->coordinator->id) {
+	echo "Coordinator: " .  $this->coordinator->link . "<br />";
+}
+echo $this->course->instructor_details; ?>
+</td>
 </tr>
 <tr>
 <th>Co/Prerequisites</th>

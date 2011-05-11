@@ -18,6 +18,7 @@ class SPHCourseDBModelCourse extends JModel
 	 */
 	var $_data;
 	var $_id;
+	var $_coordinator;
 
 	function __construct() {
 		parent::__construct();
@@ -69,6 +70,15 @@ class SPHCourseDBModelCourse extends JModel
 		return $this->_data;
 	}
 
+	function &getCoordinator() {
+		if ( empty($this->_coordinator)) {
+			$c =& JModel::getInstance('instructor','SPHCourseDBModel');
+			$c->setId($this->_data->coordinator_id);
+			$this->_coordinator =& $c->getData();
+		}
+		return $this->_coordinator;
+	}
+
 	/**
 	 * This store method takes an optional POST array
 	 * to allow for RAW html from editor inputs.
@@ -80,7 +90,7 @@ class SPHCourseDBModelCourse extends JModel
 		if ($data == null ) {
 			$data = JRequest::get('post');
 		}
-		if ( !$row->bind($data) ) {
+		if ( !$row->bind($data,'coordinator') ) {
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
