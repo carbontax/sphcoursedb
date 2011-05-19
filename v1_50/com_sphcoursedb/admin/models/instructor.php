@@ -2,6 +2,10 @@
 /**
  * Instructor Model for SPH Course DB Component
  *
+ * This class is a mock model for the Community Builder data we
+ * need to link to. Community Builder does not follow the Joomla! 
+ * MVC framework so there are no model and table classes for us
+ * to invoke directly.
  */
 
 // Check to ensure this file is included in Joomla!
@@ -58,17 +62,18 @@ class SPHCourseDBModelInstructor extends JModel
 	}
 	
 	/**
-	 * This store method takes an optional POST array
-	 * to allow for RAW html from editor inputs.
-	 * @param POST array $data - optional
+	 * 
+	 * Disabled. #__comprofiler table is read-only for our purposes
 	 */
-	function store($data=null) {
-		// #__comprofiler table is read-only for our purposes
+	function store() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * Disabled. #__comprofiler table is read-only for our purposes
+	 */
 	function delete() {
-		// #__comprofiler table is read-only for our purposes
 		return false;
 	}
 	

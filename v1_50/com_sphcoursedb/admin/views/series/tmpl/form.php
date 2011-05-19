@@ -1,6 +1,27 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php defined('_JEXEC') or die('Restricted access'); 
+JHTML::_('behavior.formvalidation');
+?>
+<script language="javascript" type="text/javascript">
+<!--
+   function submitbutton(pressbutton) {
+      var form = document.adminForm;
+      if (pressbutton == 'cancel') {
+         form.task.value = pressbutton;
+         form.submit();
+      }
+      else if (document.formvalidator.isValid(form)) {
+        form.task.value = pressbutton;
+         form.submit();
+      }
+      else {
+         alert('<?php echo JText::_('Fields highlighted in red are required.'); ?>');
+      }
+   }
+//-->
+</script>
 
-<form action="index.php" method="post" name="adminForm" id="adminForm">
+<form action="index.php" method="post" name="adminForm" id="adminForm" class="form-validate">
+<?php echo JHTML::_('form.token'); ?>
 	<div class="col100">
 		<fieldset class="adminform">
 			<legend>
@@ -11,16 +32,16 @@
 					<td width="100" align="right" class="key"><label for="name"> <?php echo JText::_( 'Name' ); ?>:
 					</label>
 					</td>
-					<td><input class="text_area" type="text" name="name" id="name"
+					<td><input class="required" type="text" name="name" id="name"
 						size="32" maxlength="250"
 						value="<?php echo $this->series->name;?>" />
 					</td>
 				</tr>
 				<tr>
-					<td width="100" align="right" class="key"><label for="number"> <?php echo JText::_( 'Description' ); ?>:
+					<td width="100" align="right" class="key"><label for="description"> <?php echo JText::_( 'Description' ); ?>:
 					</label>
 					</td>
-					<td><input class="text_area" type="text" name="number" id="number"
+					<td><input class="required" type="text" name="description" id="description"
 						size="32" maxlength="250"
 						value="<?php echo $this->series->description;?>" />
 					</td>

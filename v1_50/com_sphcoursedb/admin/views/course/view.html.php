@@ -17,8 +17,6 @@ class SPHCourseDBViewCourse extends JView
 	 **/
 	function display($tpl = null)
 	{
-		//get the hello
-//		$model =& $this->getModel('course');
 		$course =& $this->get('Data');
 		$isNew = ($course->id < 1);
 
@@ -26,7 +24,7 @@ class SPHCourseDBViewCourse extends JView
 		JToolBarHelper::title(   JText::_( 'Course' ).': <small><small>[ ' . $text.' ]</small></small>' );
 		JToolBarHelper::save();
 		if ($isNew)  {
-			JToolBarHelper::cancel();
+			JToolBarHelper::cancel('cancel', 'Cancel');
 		} else {
 			// for existing items the button is renamed `close`
 			JToolBarHelper::cancel( 'cancel', 'Close' );

@@ -52,8 +52,8 @@
 		<!-- Administration Menu Section -->
 		<menu>SPH Course DB</menu>
 		<submenu>
-		<menu controller="courses">Courses</menu>
-		<menu controller="serieslist">Series</menu>
+			<menu controller="courses">Courses</menu>
+			<menu controller="serieslist">Series</menu>
 		</submenu>
 
 		<!-- Administration Main File Copy Section -->
@@ -96,5 +96,8 @@
 			<filename>views/serieslist/view.html.php</filename>
 		</files>
 	</administration>
+	<languages>
+		<language tag="en-GB">en-GB.com_sphcoursedb.ini</language>
+	</languages>
 </install>
 
