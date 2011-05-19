@@ -1,5 +1,8 @@
 <?php
 defined('_JEXEC') or die("Restricted access");
+if ( ! $this->course->id ) {
+	echo "<p>No course was found.</p>";
+} else {
 ?>
 <table class="sphcoursedb">
 	<tr>
@@ -49,3 +52,4 @@ defined('_JEXEC') or die("Restricted access");
 	</tr>
 	<?php }?>
 </table>
+<?php } //end else 
