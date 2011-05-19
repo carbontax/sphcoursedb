@@ -26,23 +26,23 @@
     for ($i=0, $n=count( $this->items ); $i < $n; $i++)
     {
         $row =& $this->items[$i];
-        $checked    = JHTML::_( 'grid.id', $i, $row->id );
-        $link = JRoute::_( 'index.php?option=com_sphcoursedb&controller=course&task=edit&cid[]='. $row->id );
+        $checked    = JHTML::_( 'grid.id', $i, $row->series_id );
+        $link = JRoute::_( 'index.php?option=com_sphcoursedb&controller=course&task=edit&cid[]='. $row->course_id );
         $series_link = JRoute::_( 'index.php?option=com_sphcoursedb&controller=series&task=edit&cid[]='. $row->series_id );
  
         ?>
         <tr class="<?php echo "row$k"; ?>">
             <td>
-                <?php echo $row->id; ?>
+                <?php echo $row->course_id; ?>
             </td>
             <td>
               <?php echo $checked; ?>
             </td>
             <td>
-                <a href="<?php echo $link; ?>"><?php echo $row->number; ?></a>
+                <a href="<?php echo $link; ?>"><?php echo $row->course_number; ?></a>
             </td>
             <td>
-                <?php echo $row->name; ?>
+                <?php echo $row->course_name; ?>
             </td>
             <td>
                 <a href="<?php echo $series_link; ?>"><?php echo $row->series_name; ?></a>

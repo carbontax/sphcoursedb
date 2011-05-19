@@ -27,7 +27,7 @@ class SPHCourseDBViewCourses extends JView
 		JToolBarHelper::preferences('com_sphcoursedb');
 
 		// Get data from the model
-		$items =& $this->get( 'Data');
+		$items =& $this->get('List');
 
 		$this->assignRef( 'items', $items );
 

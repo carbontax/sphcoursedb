@@ -35,7 +35,7 @@ class SPHCourseDBControllerCourse extends JController
 	}
 
 	function save()	{
-		JRequest::checkToken() or jexit('Invalid Token');
+		JRequest::checkToken() or jexit('Invalid token');
 		$msg = array();
 
 		//special handling for editor fields
@@ -95,6 +95,7 @@ class SPHCourseDBControllerCourse extends JController
 	}
 
 	function remove() {
+
 		$model = $this->getModel('course');
 		$msg = JText::_('Error removing course(s)');
 		if ( $model->delete() ) {
