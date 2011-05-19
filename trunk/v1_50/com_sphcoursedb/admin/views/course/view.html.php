@@ -65,7 +65,7 @@ class SPHCourseDBViewCourse extends JView
 		
 		// populate multiple select input for instructors
 		$select_instructors = JHTML::_('select.genericlist',$results,'instructors[]',
-                'class="inputbox" multiple="multiple"','value','text',$course->instructors);
+                'class="inputbox" multiple="multiple"','value','text',explode(',',$course->instructors));
 		$this->assignRef('select_instructors', $select_instructors);
 
 		parent::display($tpl);
