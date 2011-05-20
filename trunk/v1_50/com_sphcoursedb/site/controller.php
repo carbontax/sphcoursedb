@@ -22,7 +22,7 @@ class SPHCourseDBController extends JController
 	function __construct() {
 		parent::__construct();
 		
-		$this->addModelPath(JPATH_COMPONENT_ADMINISTRATOR.DS.'models');
+//		$this->addModelPath(JPATH_COMPONENT_ADMINISTRATOR.DS.'models');
 		if ( ! JRequest::getVar('view') ) {
 			JRequest::setVar('view','serieslist');
 		}

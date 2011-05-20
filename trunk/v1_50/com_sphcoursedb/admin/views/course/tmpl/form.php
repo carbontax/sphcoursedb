@@ -115,8 +115,14 @@ JHTML::_('behavior.formvalidation');
 					<td><?php 
 					$editor =& JFactory::getEditor();
 					echo $editor->display('course_format', $this->course->course_format, '550', '100', '60', '20', false);
-					?>
-				
+					?>	
+				</tr>
+				<tr>
+					<td width="100" align="right" class="key"><label for="published"> <?php echo JText::_( 'Published' ); ?>:
+					</label>
+					</td>
+					<td><?php echo JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $this->course->published ); ?>
+					</td>
 				</tr>
 			</table>
 		</fieldset>

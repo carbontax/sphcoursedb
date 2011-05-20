@@ -61,4 +61,45 @@ class SPHCourseDBControllerSeries extends SPHCourseDBController
 	function cancel() {
 		$this->setRedirect('index.php?option=com_sphcoursedb&controller=serieslist','Operation cancelled');
 	}
+
+	function publish()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or jexit( 'Invalid Token' );
+
+		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+
+		if (count( $cid ) < 1) {
+			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+		}
+
+		$model = $this->getModel('series');
+		if(!$model->publish($cid, 1)) {
+			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
+		}
+
+		$this->setRedirect( 'index.php?option=com_sphcoursedb&controller=serieslist' );
+	}
+	
+	function unpublish()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or jexit( 'Invalid Token' );
+
+		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+
+		if (count( $cid ) < 1) {
+			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+		}
+
+		$model = $this->getModel('series');
+		if(!$model->publish($cid, 0)) {
+			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
+		}
+
+		$this->setRedirect( 'index.php?option=com_sphcoursedb&controller=serieslist' );
+	}
+	
 }

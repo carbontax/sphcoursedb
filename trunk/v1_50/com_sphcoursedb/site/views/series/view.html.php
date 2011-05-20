@@ -21,24 +21,15 @@ jimport('joomla.application.component.view');
 class SPHCourseDBViewSeries extends JView
 {
 	function display($tpl =  NULL) {
-		$doc =& JFactory::getDocument();
-		$model =& $this->getModel('series');
-		$series = $this->get('Data');
+//		$doc =& JFactory::getDocument();
+//		$model =& $this->getModel('series');
+		$items = $this->get('Data');
 
-		$doc->setTitle(JText::_('Courses'));
+//		$doc->setTitle(JText::_($items->series_name . ' Courses'));
 
-		$db =& JFactory::getDBO();
-		$query = 'SELECT id, name, number, '
-		. 'CONCAT("index.php?option=com_sphcoursedb&controller=course&cid=",id) as link '
-		. 'FROM #__sphcoursedb_courses '
-		. ' WHERE series_id=' . $series->id
-		. ' ORDER BY name';
+//		$db =& JFactory::getDBO();
 
-		$db->setQuery($query);
-		$courses = $db->loadObjectList();
-
-		$this->assignRef('series',$series);
-		$this->assignRef('courses',$courses);
+		$this->assignRef('items',$items);
 		parent::display($tpl);
 	}
 }

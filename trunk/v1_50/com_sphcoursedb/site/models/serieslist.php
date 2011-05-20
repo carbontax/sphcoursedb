@@ -1,9 +1,8 @@
 <?php
 /**
- * Administrator model for Series
+ * Front end model for Series
  *
  * @package    ca.utoronto.med.sph
- * @subpackage Components
  * @license GNU/GPL
  */
 
@@ -34,21 +33,10 @@ class SPHCourseDBModelSeriesList extends JModel
 	function _buildQuery()
 	{
 		$query = ' SELECT * '
-		. ' FROM #__sphcoursedb_series';
+		. ' FROM #__sphcoursedb_series'
+		. ' WHERE published=1';
 		return $query;
 	}
-
-	/**
-	 *
-	 * This is available for extension to support filtering. See com_weblinks
-	 */
-	function _buildContentWhere()
-	{
-		$where[] = 'published = 1';
-		$where 		= ( count( $where ) ? ' WHERE '. implode( ' AND ', $where ) : '' );
-		return $where;
-	}
-
 
 	/**
 	 * Retrieves the hello data
