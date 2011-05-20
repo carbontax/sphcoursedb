@@ -20,11 +20,6 @@ class SPHCourseDBViewSeriesList extends JView
 	 **/
 	function display($tpl = null)
 	{
-		JToolBarHelper::title( JText::_( 'SPH Course Series List' ), 'generic.png' );
-		JToolBarHelper::deleteList();
-		JToolBarHelper::editListX();
-		JToolBarHelper::addNewX();
-
 		// Get data from the model
 		$items =& $this->get( 'Data');
 

@@ -52,10 +52,10 @@ class SPHCourseDBControllerCourse extends JController
 		/* Handle File Upload */
 		$file = $_FILES['file_upload'];
 		if ($file['error']) {
-			$msg[] = $file['error'];
+			$msg[] = ($file['error'] == 4 ? "No attached syllabus" : $file['error']);
 			$this->clearSyllabus();
 		} else {
-			//Clean up filename to get rid of strange characters like spaces etc
+			//Clean up filename to get rid of unfriendly characters like spaces etc
 			$this->post['syllabus_name'] = JFile::makeSafe($file['name']);
 			$this->post['syllabus_type'] = $file['type'];
 			$this->post['syllabus_size'] = $file['size'];
@@ -143,4 +143,45 @@ class SPHCourseDBControllerCourse extends JController
 		$this->post['syllabus_size'] = null;
 		$this->post['syllabus_content'] = null;
 	}
+
+	function publish()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or jexit( 'Invalid Token' );
+
+		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+
+		if (count( $cid ) < 1) {
+			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+		}
+
+		$model = $this->getModel('course');
+		if(!$model->publish($cid, 1)) {
+			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
+		}
+
+		$this->setRedirect( 'index.php?option=com_sphcoursedb&controller=courses' );
+	}
+
+	function unpublish()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or jexit( 'Invalid Token' );
+
+		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
+		JArrayHelper::toInteger($cid);
+
+		if (count( $cid ) < 1) {
+			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+		}
+
+		$model = $this->getModel('course');
+		if(!$model->publish($cid, 0)) {
+			echo "<script> alert('".$model->getError(true)."'); window.history.go(-1); </script>\n";
+		}
+
+		$this->setRedirect( 'index.php?option=com_sphcoursedb&controller=courses' );
+	}
+
 }

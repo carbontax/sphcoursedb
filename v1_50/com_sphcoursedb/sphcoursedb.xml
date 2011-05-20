@@ -22,6 +22,10 @@
 		<filename>controllers/index.html</filename>
 		<filename>controllers/series.php</filename>
 		<filename>controllers/course.php</filename>
+		<filename>models/course.php</filename>
+		<filename>models/index.html</filename>
+		<filename>models/series.php</filename>
+		<filename>models/serieslist.php</filename>
 		<filename>views/index.html</filename>
 		<filename>views/course/index.html</filename>
 		<filename>views/course/view.html.php</filename>
@@ -71,7 +75,6 @@
 			<filename>tables/course.php</filename>
 			<filename>tables/index.html</filename>
 			<filename>tables/series.php</filename>
-			<filename>uninstall.sql</filename>
 			<filename>views/course/index.html</filename>
 			<filename>views/course/tmpl/form.php</filename>
 			<filename>views/course/tmpl/index.html</filename>

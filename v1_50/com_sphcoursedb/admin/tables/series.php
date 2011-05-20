@@ -1,7 +1,7 @@
 <?php
 /**
  * Course table class
- * 
+ *
  */
 
 // No direct access
@@ -25,6 +25,11 @@ class TableSeries extends JTable
 	 * @var string
 	 */
 	var $description = null;
+
+	/**
+	 * @var int
+	 */
+	var $published = 0;
 
 	/**
 	 * Constructor

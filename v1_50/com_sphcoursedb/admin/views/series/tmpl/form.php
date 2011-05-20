@@ -46,6 +46,14 @@ JHTML::_('behavior.formvalidation');
 						value="<?php echo $this->series->description;?>" />
 					</td>
 				</tr>
+				<tr>
+					<td width="100" align="right" class="key"><label for="published"> <?php echo JText::_( 'Published' ); ?>:
+					</label>
+					</td>
+					<td><?php echo JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $series->published ); ?>
+					</td>
+				</tr>
+				
 			</table>
 		</fieldset>
 	</div>

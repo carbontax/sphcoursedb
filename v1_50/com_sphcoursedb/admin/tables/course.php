@@ -89,6 +89,11 @@ class TableCourse extends JTable
 	var $syllabus_content = null;
 
 	/**
+	 * @var int
+	 */
+	var $published = 0;
+
+	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object

@@ -49,6 +49,7 @@ class SPHCourseDBModelSeries extends JModel
 			$this->_id = 0;
 			$this->_data->name = null;
 			$this->_data->description = null;
+			$this->_data->published = 0;
 		}
 		return $this->_data;
 	}
@@ -84,6 +85,33 @@ class SPHCourseDBModelSeries extends JModel
 		}
 		return true;
 	}
+	
+			/**
+	 * Method to (un)publish a course series
+	 *
+	 * @access	public
+	 * @return	boolean	True on success
+	 * @since	1.5
+	 */
+	function publish($cid = array(), $publish = 1)
+	{
+		if (count( $cid ))
+		{
+			JArrayHelper::toInteger($cid);
+			$cids = implode( ',', $cid );
 
+			$query = 'UPDATE #__sphcoursedb_series'
+				. ' SET published = '.(int) $publish
+				. ' WHERE id IN ( '.$cids.' )';
+			$this->_db->setQuery( $query );
+			if (!$this->_db->query()) {
+				$this->setError($this->_db->getErrorMsg());
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 
 }
