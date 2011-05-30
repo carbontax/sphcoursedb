@@ -32,6 +32,15 @@ class SPHCourseDBViewCourse extends JView
 
 		$this->assignRef('course', $course);
 
+		//create select element for course designation
+		$designation_options = array();
+		foreach (  array('F','H','L','M','n','&deg;','S','Y') as $designation ) {
+			$designation_options[] = JHTML::_('select.option',$designation,$designation);
+		}
+		$select_designation = JHTML::_('select.genericlist',$designation_options,
+		'designation', 'class="inputbox"', 'value', 'text', $course->designation);
+		$this->assignRef('select_designation', $select_designation);
+
 		$syllabus_link = "No syllabus file uploaded";
 		$syllabus_details = "";
 		if ( $course->syllabus_size > 0 ) {
@@ -52,20 +61,27 @@ class SPHCourseDBViewCourse extends JView
 		$results = $db->loadObjectList();
 		$select_series = JHTML::_('select.genericlist',$results,'series_id',
                 'class="inputbox"','value','text',$course->series_id);
-		
+
 		$this->assignRef('select_series', $select_series);
-				
+
 		$query = "SELECT id AS value, CONCAT(lastname,\", \",firstname) AS text "
 		. "FROM #__comprofiler ORDER BY lastname";
 		$db->setQuery($query);
 		$results = $db->loadObjectList();
-		$select_coordinator = JHTML::_('select.genericlist',$results,'coordinator_id',
+		$coordinator_opts[] = JHTML::_('select.option','','-- Choose a Faculty Member --');
+		foreach($results as $k => $v) {
+			$coordinator_opts[] = JHTML::_('select.option',$v->value,JText::_($v->text));
+		}
+		$select_coordinator = JHTML::_('select.genericlist',$coordinator_opts,'coordinator_id',
                 'class="inputbox"','value','text',$course->coordinator_id);
 		$this->assignRef('select_coordinator', $select_coordinator);
-		
+
 		// populate multiple select input for instructors
-		$select_instructors = JHTML::_('select.genericlist',$results,'instructors[]',
-                'class="inputbox" multiple="multiple"','value','text',explode(',',$course->instructors));
+		$coordinator_opts[0] = JHTML::_('select.option','','-- Choose one or more Faculty Members --');
+/*		$select_instructors = JHTML::_('select.genericlist',$results,'instructors[]',
+                'class="inputbox" multiple="multiple"','value','text',explode(',',$course->instructors));*/
+		$select_instructors = JHTML::_('select.genericlist',$coordinator_opts,'instructors[]',
+		'class="inputbox" multiple="multiple"', 'value', 'text', explode(',',$course->instructors));
 		$this->assignRef('select_instructors', $select_instructors);
 
 		parent::display($tpl);

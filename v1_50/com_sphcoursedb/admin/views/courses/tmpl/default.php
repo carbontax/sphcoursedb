@@ -34,7 +34,7 @@
 				</td>
 				<td><?php echo $checked; ?>
 				</td>
-				<td><a href="<?php echo $link; ?>"><?php echo $row->course_number; ?>
+				<td><a href="<?php echo $link; ?>"><?php echo implode(' ',array($row->course_number,$row->designation)); ?>
 				</a>
 				</td>
 				<td><?php echo $row->course_name; ?>

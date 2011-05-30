@@ -17,11 +17,12 @@ class SPHCourseDBModelSeries extends JModel
 	 * @var array
 	 */
 	var $_data;
+	var $_courses;
 	var $_id;
 
 	function __construct() {
 		parent::__construct();
-		 
+			
 		$array = JRequest::getVar('cid',0,'','array');
 		$this->setId((int)$array[0]);
 	}
@@ -36,26 +37,30 @@ class SPHCourseDBModelSeries extends JModel
 	function setId($id) {
 		$this->_id = $id;
 		$this->_data = null;
+		$this->_courses = array();
 	}
 
 	function &getData() {
 
-		if ( empty($this->_data) ) {
-			$query = 'SELECT s.id as series_id, s.name as series_name, s.description as series_description,'
-			. ' CONCAT("index.php?option=com_sphcoursedb&controller=course&cid=",c.id) as course_link,'
-			. ' c.name as course_name, c.number as course_number'
-			. ' FROM `#__sphcoursedb_series` AS s, `#__sphcoursedb_courses` AS c'
-			. ' WHERE c.series_id=s.id AND s.published=1 AND c.published=1 AND s.id=' . $this->_id;
+		if ( empty($this->_data) )
+		{
+			$query = "SELECT * FROM `#__sphcoursedb_series` WHERE id=" . $this->_id;
 			$this->_db->setQuery($query);
 			$this->_data = $this->_db->loadObject();
 		}
-		if ( !$this->_data ) {
-			$this->_data = new stdClass();
-			$this->_id = 0;
-			$this->_data->name = null;
-			$this->_data->description = null;
-		}
 		return $this->_data;
+	}
+
+	function &getCourses() {
+		if ( ! count($this->_courses) ) {
+			$query = 'SELECT CONCAT("index.php?option=com_sphcoursedb&controller=course&cid=",id) as link,'
+			. ' name, number, designation FROM `#__sphcoursedb_courses` '
+			. ' WHERE series_id=' . $this->_id
+			. ' ORDER BY number';
+			$this->_db->setQuery($query);
+			$this->_courses = $this->_db->loadObjectList();
+		}
+		return $this->_courses;
 	}
 
 }

@@ -45,7 +45,7 @@ class SPHCourseDBModelCourse extends JModel
 	function &getData() {
 		if ( empty($this->_data) ) {
 			/* we specify the fields so we can skip syllabus_content */
-			$query = "SELECT id, series_id, name, number, coordinator_id, "
+			$query = "SELECT id, series_id, name, number, designation, coordinator_id, "
 			. " instructors, instructor_details, prereqs, description, "
 			. " objectives, course_format, syllabus_name, syllabus_type, "
 			. " syllabus_size, published "
@@ -59,6 +59,7 @@ class SPHCourseDBModelCourse extends JModel
 			$this->_data->series_id = null;
 			$this->_data->name = null;
 			$this->_data->number = null;
+			$this->_data->designation = null;
 			$this->_data->coordinator_id = null;
 			$this->_data->instructors = null;
 			$this->_data->instructor_detail = null;

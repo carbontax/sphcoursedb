@@ -36,6 +36,11 @@ class TableCourse extends JTable
 	/**
 	 * @var string
 	 */
+	var $designation = null;
+
+	/**
+	 * @var string
+	 */
 	var $coordinator_id = null;
 
 	/**

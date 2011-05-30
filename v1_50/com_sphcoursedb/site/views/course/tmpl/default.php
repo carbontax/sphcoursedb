@@ -11,7 +11,7 @@ if ( ! $this->course->id ) {
 	</tr>
 	<tr>
 		<th>Course Number</th>
-		<td><?php echo $this->course->number; ?></td>
+		<td><?php echo $this->course->number; ?> <?php echo $this->course->designation; ?></td>
 	</tr>
 	<tr>
 		<th>Instructor</th>

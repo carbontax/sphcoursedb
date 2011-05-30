@@ -33,10 +33,11 @@ class SPHCourseDBModelCourses extends JModel
 	function _buildQuery()
 	{
 		$query = ' SELECT  c.id as id, c.name as course_name, c.number as course_number,'
-		. ' c.published as published, '
+		. ' c.designation as designation, c.published as published, '
 		. ' s.name as series_name, s.id as series_id '
 		. ' FROM #__sphcoursedb_courses c, #__sphcoursedb_series s '
-		. ' WHERE c.series_id=s.id'
+		. ' WHERE c.series_id=s.id '
+		. ' ORDER BY series_name,course_number'
 		;
 		return $query;
 	}

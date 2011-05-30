@@ -24,6 +24,7 @@
 		<filename>controllers/course.php</filename>
 		<filename>models/course.php</filename>
 		<filename>models/index.html</filename>
+		<filename>models/instructor.php</filename>
 		<filename>models/series.php</filename>
 		<filename>models/serieslist.php</filename>
 		<filename>views/index.html</filename>

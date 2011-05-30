@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `#__sphcoursedb_courses` (
 `series_id` INT(11) UNSIGNED NOT NULL,
 `name` VARCHAR(255) NOT NULL,
 `number` VARCHAR(255) NOT NULL,
+`designation` VARCHAR(255) NOT NULL DEFAULT 'H',
 `coordinator_id` INT(11) UNSIGNED,
 `instructors` VARCHAR(255), 
 `instructor_details` TEXT,
