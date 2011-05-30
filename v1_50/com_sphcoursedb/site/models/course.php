@@ -75,7 +75,7 @@ class SPHCourseDBModelCourse extends JModel
 		}
 		return $this->_data;
 	}
-	
+
 	function &getCoordinator() {
 		if ( empty($this->_coordinator) && $this->_data->coordinator_id ) {
 			$c =& JModel::getInstance('instructor','SPHCourseDBModel');
@@ -86,7 +86,7 @@ class SPHCourseDBModelCourse extends JModel
 	}
 
 	function &getInstructors() {
-		if ( ! count($this->_instructors) ) {
+		if ( ! count($this->_instructors) && $this->_data->instructors ) {
 			$instructor_ids = explode(',',$this->_data->instructors);
 			foreach ( $instructor_ids as $i ) {
 				$c =& JModel::getInstance('instructor','SPHCourseDBModel');
@@ -95,5 +95,6 @@ class SPHCourseDBModelCourse extends JModel
 			}
 			return $this->_instructors;
 		}
+		return $this->_instructors;
 	}
 }
