@@ -21,15 +21,12 @@ jimport('joomla.application.component.view');
 class SPHCourseDBViewSeries extends JView
 {
 	function display($tpl =  NULL) {
-//		$doc =& JFactory::getDocument();
-//		$model =& $this->getModel('series');
-		$items = $this->get('Data');
 
-//		$doc->setTitle(JText::_($items->series_name . ' Courses'));
+		$series =& $this->get('Data');
+		$courses =& $this->get('Courses');
 
-//		$db =& JFactory::getDBO();
-
-		$this->assignRef('items',$items);
+		$this->assignRef('series',$series);
+		$this->assignRef('courses',$courses);
 		parent::display($tpl);
 	}
 }

@@ -38,6 +38,13 @@ JHTML::_('behavior.formvalidation');
 					</td>
 				</tr>
 				<tr>
+					<td width="100" align="right" class="key"><label for="designation"> <?php echo JText::_( 'Designation' ); ?>:
+					</label>
+					</td>
+					<td><?php echo $this->select_designation; ?>
+					</td>
+				</tr>
+				<tr>
 					<td width="100" align="right" class="key"><label for="name"> <?php echo JText::_( 'Name' ); ?>:
 					</label>
 					</td>

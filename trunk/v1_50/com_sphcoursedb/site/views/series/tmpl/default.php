@@ -1,21 +1,20 @@
 <?php
 defined('_JEXEC') or die("Restricted access"); 
 ?>
-<?php if ( count($this->items) == 0 ) {?>
-<div class="sphcoursedb">There are no active courses in the Series.</div>
+<H2><?php echo $this->series->name ?> Courses</H2>
+<?php if ( count($this->courses) == 0 ) {?>
+<div class="sphcoursedb">There are currently no active courses in this series.</div>
 <?php } else { ?>
-
-<H2><?php echo $this->items[0]->series_name ?> Courses</H2>
 
 <table class="sphcoursedb">
 <tr>
 <th>Name</th>
 <th>Course Number</th>
 </tr>
-<?php foreach($this->items as $course){ ?>
+<?php foreach($this->courses as $course){ ?>
 <tr>
-<td><a href="<?php echo $course->course_link; ?>"><?php echo $course->course_name; ?></a></td>
-<td><?php echo $course->course_number; ?></td>
+<td><a href="<?php echo $course->link; ?>"><?php echo $course->name; ?></a></td>
+<td><?php echo $course->number; ?></td>
 </tr>
 <?php }  ?>
 </table>

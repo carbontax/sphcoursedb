@@ -45,7 +45,7 @@ class SPHCourseDBModelCourse extends JModel
 	function &getData() {
 		if ( empty($this->_data) ) {
 			/* we specify the fields so we can skip syllabus_content */
-			$query = 'SELECT id, series_id, name, number, coordinator_id, '
+			$query = 'SELECT id, series_id, name, number, designation, coordinator_id, '
 			. ' instructors, instructor_details, prereqs, description, '
 			. ' objectives, course_format, syllabus_name, syllabus_type, '
 			. ' syllabus_size '
@@ -77,7 +77,7 @@ class SPHCourseDBModelCourse extends JModel
 	}
 	
 	function &getCoordinator() {
-		if ( empty($this->_coordinator)) {
+		if ( empty($this->_coordinator) && $this->_data->coordinator_id ) {
 			$c =& JModel::getInstance('instructor','SPHCourseDBModel');
 			$c->setId($this->_data->coordinator_id);
 			$this->_coordinator =& $c->getData();
